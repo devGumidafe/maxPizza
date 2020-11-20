@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-may-2020 17:02:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="maxpizza.modelo.Producto" table="producto" catalog="pizzeria" optimistic-lock="version">
+        <id name="idProducto" type="java.lang.Integer">
+            <column name="idProducto" />
+            <generator class="identity" />
+        </id>
+        <property name="tipo" type="string">
+            <column name="tipo" length="20" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="200" not-null="true" />
+        </property>
+        <property name="tam" type="string">
+            <column name="tam" length="20" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="precio" precision="8" not-null="true" />
+        </property>
+        <set name="detallepedidos" table="detallepedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProducto" not-null="true" />
+            </key>
+            <one-to-many class="maxpizza.modelo.Detallepedido" />
+        </set>
+    </class>
+</hibernate-mapping>

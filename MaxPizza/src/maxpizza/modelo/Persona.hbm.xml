@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-may-2020 17:02:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="maxpizza.modelo.Persona" table="persona" catalog="pizzeria" optimistic-lock="version">
+        <id name="usuario" type="string">
+            <column name="usuario" length="20" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="direccion" class="maxpizza.modelo.Direccion" fetch="select">
+            <column name="idDireccion" />
+        </many-to-one>
+        <property name="pass" type="string">
+            <column name="pass" length="20" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="10" not-null="true" />
+        </property>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" length="20" not-null="true" />
+            </key>
+            <one-to-many class="maxpizza.modelo.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>

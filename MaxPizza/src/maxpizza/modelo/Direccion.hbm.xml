@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-may-2020 17:02:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="maxpizza.modelo.Direccion" table="direccion" catalog="pizzeria" optimistic-lock="version">
+        <id name="idDireccion" type="java.lang.Integer">
+            <column name="idDireccion" />
+            <generator class="identity" />
+        </id>
+        <property name="calle" type="string">
+            <column name="calle" length="50" not-null="true" />
+        </property>
+        <property name="numero" type="int">
+            <column name="numero" not-null="true" />
+        </property>
+        <property name="codigoPostal" type="string">
+            <column name="codigoPostal" length="5" not-null="true" />
+        </property>
+        <property name="localidad" type="string">
+            <column name="localidad" length="50" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="9" not-null="true" />
+        </property>
+        <set name="personas" table="persona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idDireccion" />
+            </key>
+            <one-to-many class="maxpizza.modelo.Persona" />
+        </set>
+    </class>
+</hibernate-mapping>

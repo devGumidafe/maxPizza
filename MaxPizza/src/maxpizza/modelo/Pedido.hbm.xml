@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-may-2020 17:02:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="maxpizza.modelo.Pedido" table="pedido" catalog="pizzeria" optimistic-lock="version">
+        <id name="idPedido" type="java.lang.Integer">
+            <column name="idPedido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="maxpizza.modelo.Persona" fetch="select">
+            <column name="idCliente" length="20" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="precioTotal" type="big_decimal">
+            <column name="precioTotal" precision="8" not-null="true" />
+        </property>
+        <property name="formaPago" type="string">
+            <column name="formaPago" length="10" not-null="true" />
+        </property>
+        <set name="detallepedidos" table="detallepedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPedido" not-null="true" />
+            </key>
+            <one-to-many class="maxpizza.modelo.Detallepedido" />
+        </set>
+    </class>
+</hibernate-mapping>

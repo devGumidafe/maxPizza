@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-may-2020 17:02:44 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="maxpizza.modelo.Detallepedido" table="detallepedido" catalog="pizzeria" optimistic-lock="version">
+        <composite-id name="id" class="maxpizza.modelo.DetallepedidoId">
+            <key-property name="idPedido" type="int">
+                <column name="idPedido" />
+            </key-property>
+            <key-property name="idProducto" type="int">
+                <column name="idProducto" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="pedido" class="maxpizza.modelo.Pedido" update="false" insert="false" fetch="select">
+            <column name="idPedido" not-null="true" />
+        </many-to-one>
+        <many-to-one name="producto" class="maxpizza.modelo.Producto" update="false" insert="false" fetch="select">
+            <column name="idProducto" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="precioUnidad" type="big_decimal">
+            <column name="precioUnidad" precision="8" not-null="true" />
+        </property>
+        <property name="precioTotal" type="big_decimal">
+            <column name="precioTotal" precision="8" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
